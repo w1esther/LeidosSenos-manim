@@ -17,10 +17,10 @@ class LeiDosSenos(MovingCameraScene):
         
         self.wait(2)
 
-        ponto1_tri = ([0, 2, 0])
-        ponto2_tri = ([-1.6, -1.2, 0])
-        ponto3_tri = ([1.6, -1.2, 0])
-        ponto_origem = ([0, 0, 0])
+        ponto1_tri = np.array([0, 2, 0])
+        ponto2_tri = np.array([-1.6, -1.2, 0])
+        ponto3_tri = np.array([1.6, -1.2, 0])
+        ponto_origem = np.array([0, 0, 0])
 
         dot1 = Dot(ponto1_tri, color=RED)
         dot2 = Dot(ponto2_tri, color=RED)
