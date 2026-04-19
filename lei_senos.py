@@ -5,11 +5,11 @@ class LeiDosSenos(MovingCameraScene):
 
     def construct(self):
         
-        plano = NumberPlane(
-            background_line_style={'stroke_opacity': 0.4}
-        )
-        self.add(plano)
-        self.wait(1)
+        # plano = NumberPlane(
+        #     background_line_style={'stroke_opacity': 0.4}
+        # )
+        # self.add(plano)
+        # self.wait(1)
 
         circuculo = Circle(radius=2, color=BLUE)
 
@@ -63,5 +63,94 @@ class LeiDosSenos(MovingCameraScene):
         label_lado_c = MathTex(r'c').scale(0.8).shift(0.5*UP + 1.1*LEFT)
 
         self.play(FadeIn(label_lado_a), FadeIn(label_lado_c), FadeIn(label_lado_b))
+
+        self.wait(2)
+        ponto1 = np.array([-0.85, 0.4, 0])
+        ponto2 = np.array([0, -1.2, 0])
+        ponto3 = np.array([0.85, 0.4, 0])
+
+        linha_origem_c = Line(ORIGIN, ponto1, color=PINK)
+        linha_origem_a = Line(ORIGIN, ponto2, color=PINK)
+        linha_origem_b = Line(ORIGIN, ponto3, color=PINK)
+
+        l1 = Line(ponto1, ORIGIN)
+        l2 = Line(ponto1, ponto1_tri)
+
+        l3 = Line(ponto2, ORIGIN)
+        l4 = Line(ponto2, ponto2_tri)
+
+        l5 = Line(ponto3, ORIGIN)
+        l6 = Line(ponto3, ponto3_tri)
+
+        self.play(Write(linha_origem_c), Write(linha_origem_a), Write(linha_origem_b))
+
+        self.wait(1)
+
+        ang_reto = RightAngle(l1, l2, length=0.25, color=GREEN)
+        ang_reto2 = RightAngle(l3, l4, length=0.25, color=GREEN)
+        ang_reto3 = RightAngle(l5, l6, length=0.25, color=GREEN)
+
+        self.play(Create(ang_reto), Create(ang_reto2), Create(ang_reto3))
+
+        self.wait(2)
+
+        raio1 = Line(ORIGIN, ponto2_tri, color=DARK_GRAY)
+        raio2 = Line(ORIGIN, ponto1_tri, color=DARK_GRAY)
+        raio3 = Line(ORIGIN, ponto3_tri, color=DARK_GRAY)
+
+        label_raio1 = MathTex(r'r').scale(0.5).shift(0.7*LEFT + 0.3*DOWN)
+        label_raio2 = MathTex(r'r').scale(0.5).shift(0.7*RIGHT + 0.3*DOWN)
+        label_raio3 = MathTex(r'r').scale(0.5).shift(0.2*LEFT + 0.6*UP)
+
+        self.play(Create(raio1), Create(raio2), Create(raio3))
+
+        self.play(FadeIn(label_raio1), FadeIn(label_raio2), FadeIn(label_raio3))
+
+        self.wait(2)
+
+        tri_BOC = Polygon(ponto2_tri, ORIGIN, ponto3_tri, fill_color=YELLOW, fill_opacity=0.2)
+
+        self.play(self.camera.frame.animate.scale(0.7))
+
+        self.play(FadeIn(tri_BOC))
+
+        ang_BOC = Angle(raio1, raio3, color=YELLOW)
+
+        alfa_label2 = MathTex(r"2\alpha").scale(0.5).shift(0.55*DOWN)
+
+        alfa_label21 = MathTex(r"\alpha").scale(0.5).shift(0.55*DOWN + 0.3*RIGHT)
+        alfa_label22 = MathTex(r"\alpha").scale(0.5).shift(0.55*DOWN + 0.3*LEFT)
+
+        self.play(Create(ang_BOC), FadeIn(alfa_label2))
+
+        self.wait()
+
+        label_lado_a2 = MathTex(r'\frac{a}{2}').scale(0.5).shift(1.55*DOWN+0.5*LEFT)
+        label_lado_a3 = MathTex(r'\frac{a}{2}').scale(0.5).shift(1.55*DOWN+0.5*RIGHT)
+
+        self.play(FadeOut(alfa_label2), FadeIn(alfa_label21), FadeIn(alfa_label22), FadeIn(label_lado_a2), FadeIn(label_lado_a3))
+
+        self.play(self.camera.frame.animate.shift(1*LEFT))
+
+        seno_alfa = MathTex(r'Sen(\alpha) = \frac{\frac{a}{2}}{r}').shift(4*LEFT)
+        seno_alfa2 = MathTex(r'Sen(\alpha) = \frac{a}{2r}').shift(4*LEFT)
+        seno_alfa3 = MathTex(r'Sen(\alpha)\cdot2r = a').shift(4*LEFT)
+        seno_alfa4 = MathTex(r'2r = \frac{a}{Sen(\alpha)}').shift(4*LEFT)
+
+        self.wait(2)
+
+        self.play(FadeIn(seno_alfa))
+
+        self.wait()
+
+        self.play(Transform(seno_alfa, seno_alfa2))
+
+        self.wait()
+
+        self.play(Transform(seno_alfa, seno_alfa3))
+
+        self.wait()
+
+        self.play(Transform(seno_alfa, seno_alfa4))
 
         self.wait(2)
