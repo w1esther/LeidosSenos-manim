@@ -98,9 +98,9 @@ class LeiDosSenos(MovingCameraScene):
         raio2 = Line(ORIGIN, ponto1_tri, color=DARK_GRAY)
         raio3 = Line(ORIGIN, ponto3_tri, color=DARK_GRAY)
 
-        label_raio1 = MathTex(r'r').scale(0.5).shift(0.7*LEFT + 0.3*DOWN)
-        label_raio2 = MathTex(r'r').scale(0.5).shift(0.7*RIGHT + 0.3*DOWN)
-        label_raio3 = MathTex(r'r').scale(0.5).shift(0.2*LEFT + 0.6*UP)
+        label_raio1 = MathTex(r'r').scale(0.5).shift(0.8*LEFT + 0.4*DOWN)
+        label_raio2 = MathTex(r'r').scale(0.5).shift(0.8*RIGHT + 0.4*DOWN)
+        label_raio3 = MathTex(r'r').scale(0.5).shift(0.2*LEFT + 0.8*UP)
 
         self.play(Create(raio1), Create(raio2), Create(raio3))
 
@@ -128,7 +128,7 @@ class LeiDosSenos(MovingCameraScene):
         label_lado_a2 = MathTex(r'\frac{a}{2}').scale(0.5).shift(1.55*DOWN+0.5*LEFT)
         label_lado_a3 = MathTex(r'\frac{a}{2}').scale(0.5).shift(1.55*DOWN+0.5*RIGHT)
 
-        self.play(FadeOut(alfa_label2), FadeIn(alfa_label21), FadeIn(alfa_label22), FadeIn(label_lado_a2), FadeIn(label_lado_a3))
+        self.play(FadeOut(alfa_label2), FadeIn(alfa_label21), FadeIn(alfa_label22), FadeIn(label_lado_a2), FadeIn(label_lado_a3), FadeOut(label_lado_a))
 
         self.play(self.camera.frame.animate.shift(1*LEFT))
 
@@ -152,5 +152,110 @@ class LeiDosSenos(MovingCameraScene):
         self.wait()
 
         self.play(Transform(seno_alfa, seno_alfa4))
+
+        self.wait(2)
+
+        self.play(seno_alfa.animate.scale(0.5).shift(2*UP))
+
+        self.wait()
+
+        tri_BOA = Polygon(ponto2_tri, ORIGIN, ponto1_tri, fill_color = ORANGE, fill_opacity = 0.3)
+
+        angulo_BOA = Angle(raio2, raio1, color=ORANGE)
+
+        gama_label2 = MathTex(r"2\gamma").scale(0.5).shift(0.6*LEFT)
+
+        self.play(FadeOut(tri_BOC), FadeIn(tri_BOA), Create(angulo_BOA), FadeIn(gama_label2))
+
+        self.wait()
+
+        gama_label3 = MathTex(r"\gamma").scale(0.5).shift(0.6*LEFT)
+        gama_label4 = MathTex(r"\gamma").scale(0.5).shift(0.4*LEFT + 0.5*UP)
+
+        lado_c = MathTex(r'\frac{c}{2}').scale(0.5).shift(1.2*UP + 0.7*LEFT)
+        lado_c2 = MathTex(r'\frac{c}{2}').scale(0.5).shift(0.3*DOWN + 1.4*LEFT)
+
+        self.play(FadeOut(gama_label2), FadeIn(gama_label3), FadeIn(gama_label4), FadeIn(lado_c), FadeIn(lado_c2), FadeOut(label_lado_c))
+
+        self.wait(2)
+
+        seno_gama = MathTex(r'Sen(\gamma) = \frac{\frac{c}{2}}{r}').shift(4*LEFT)
+        seno_gama2 = MathTex(r'Sen(\gamma) = \frac{c}{2r}').shift(4*LEFT)
+        seno_gama3 = MathTex(r'Sen(\gamma)\cdot2r = c').shift(4*LEFT)
+        seno_gama4 = MathTex(r'2r = \frac{c}{Sen(\gamma)}').shift(4*LEFT)
+
+        self.play(FadeIn(seno_gama))
+
+        self.wait()
+
+        self.play(Transform(seno_gama, seno_gama2))
+
+        self.wait()
+
+        self.play(Transform(seno_gama, seno_gama3))
+
+        self.wait()
+
+        self.play(Transform(seno_gama, seno_gama4))
+
+        self.wait(2)
+
+        self.play(seno_gama.animate.scale(0.5).shift(1.2*UP))
+
+        self.wait(2)
+
+        tri_AOC = Polygon(ponto1_tri, ORIGIN, ponto3_tri, fill_color = PURPLE, fill_opacity=0.2)
+        angulo_AOC = Angle(raio3, raio2, color=PURPLE)
+
+        beta_label2 = MathTex(r"2\beta").scale(0.5).shift(0.55*UP + 0.3*RIGHT)
+
+        self.play(FadeOut(tri_BOA), FadeIn(tri_AOC), Create(angulo_AOC), FadeIn(beta_label2))
+
+        self.wait(1)
+
+        beta_label3 = MathTex(r"\beta").scale(0.5).shift(0.55*UP + 0.3*RIGHT)
+        beta_label4 = MathTex(r"\beta").scale(0.5).shift(0.2*DOWN + 0.6*RIGHT)
+
+        lado_b = MathTex(r'\frac{b}{2}').scale(0.5).shift(1.2*UP + 0.7*RIGHT)
+        lado_b2 = MathTex(r'\frac{b}{2}').scale(0.5).shift(0.3*DOWN + 1.4*RIGHT)
+
+        self.play(FadeOut(beta_label2), FadeIn(beta_label3), FadeIn(beta_label4), FadeIn(lado_b), FadeIn(lado_b2), FadeOut(label_lado_b))
+
+        self.wait(2)
+
+        seno_beta = MathTex(r'Sen(\beta) = \frac{\frac{b}{2}}{r}').shift(4*LEFT)
+        seno_beta2 = MathTex(r'Sen(\beta) = \frac{b}{2r}').shift(4*LEFT)
+        seno_beta3 = MathTex(r'Sen(\beta)\cdot2r = b').shift(4*LEFT)
+        seno_beta4 = MathTex(r'2r = \frac{b}{Sen(\beta)}').shift(4*LEFT)
+
+        self.play(FadeIn(seno_beta))
+
+        self.wait()
+
+        self.play(Transform(seno_beta, seno_beta2))
+
+        self.wait()
+
+        self.play(Transform(seno_beta, seno_beta3))
+
+        self.wait()
+
+        self.play(Transform(seno_beta, seno_beta4))
+
+        self.wait(2)
+
+        self.play(seno_beta.animate.scale(0.5).shift(0.4*UP))
+
+        self.wait(2)
+
+        self.play(FadeOut(tri_AOC))
+
+        self.play(self.camera.frame.animate.scale(1.3).shift(1*RIGHT + 1*UP))
+
+        lei_senos = MathTex(r'\frac{a}{Sen(\alpha)} = \frac{c}{Sen(\gamma)} = \frac{b}{Sen(\beta)} = 2r').shift(3.1*UP).scale(0.8)
+
+        label_lei_senos = Text('Lei dos Senos:').scale(0.6).shift(4*UP)
+
+        self.play(FadeOut(seno_alfa), FadeOut(seno_beta), FadeOut(seno_gama), FadeIn(lei_senos), FadeIn(label_lei_senos))
 
         self.wait(2)
