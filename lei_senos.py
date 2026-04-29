@@ -84,6 +84,9 @@ class LeiDosSenos(MovingCameraScene):
 
         self.play(Write(linha_origem_c), Write(linha_origem_a), Write(linha_origem_b))
 
+        self.bring_to_front(triangulo)
+        self.bring_to_front(dot1, dot2, dot3, dot4)
+
         self.wait(1)
 
         ang_reto = RightAngle(l1, l2, length=0.25, color=GREEN)
@@ -91,6 +94,9 @@ class LeiDosSenos(MovingCameraScene):
         ang_reto3 = RightAngle(l5, l6, length=0.25, color=GREEN)
 
         self.play(Create(ang_reto), Create(ang_reto2), Create(ang_reto3))
+
+        self.bring_to_front(triangulo)
+        self.bring_to_front(dot1, dot2, dot3, dot4)
 
         self.wait(2)
 
@@ -104,6 +110,8 @@ class LeiDosSenos(MovingCameraScene):
 
         self.play(Create(raio1), Create(raio2), Create(raio3))
 
+        self.bring_to_front(dot1, dot2, dot3, dot4)
+
         self.play(FadeIn(label_raio1), FadeIn(label_raio2), FadeIn(label_raio3))
 
         self.wait(2)
@@ -113,6 +121,8 @@ class LeiDosSenos(MovingCameraScene):
         self.play(self.camera.frame.animate.scale(0.7))
 
         self.play(FadeIn(tri_BOC))
+
+        self.bring_to_front(dot1, dot2, dot3, dot4)
 
         ang_BOC = Angle(raio1, raio3, color=YELLOW)
 
@@ -167,6 +177,8 @@ class LeiDosSenos(MovingCameraScene):
 
         self.play(FadeOut(tri_BOC), FadeIn(tri_BOA), Create(angulo_BOA), FadeIn(gama_label2))
 
+        self.bring_to_front(dot1, dot2, dot3, dot4)
+
         self.wait()
 
         gama_label3 = MathTex(r"\gamma").scale(0.5).shift(0.6*LEFT)
@@ -210,6 +222,8 @@ class LeiDosSenos(MovingCameraScene):
         beta_label2 = MathTex(r"2\beta").scale(0.5).shift(0.55*UP + 0.3*RIGHT)
 
         self.play(FadeOut(tri_BOA), FadeIn(tri_AOC), Create(angulo_AOC), FadeIn(beta_label2))
+
+        self.bring_to_front(dot1, dot2, dot3, dot4)
 
         self.wait(1)
 
