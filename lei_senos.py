@@ -5,11 +5,11 @@ class LeiDosSenos(MovingCameraScene):
 
     def construct(self):
         
-        # plano = NumberPlane(
-        #     background_line_style={'stroke_opacity': 0.4}
-        # )
-        # self.add(plano)
-        # self.wait(1)
+        plano = NumberPlane(
+            background_line_style={'stroke_opacity': 0.4}
+        )
+        self.add(plano)
+        self.wait(1)
 
         circuculo = Circle(radius=2, color=BLUE)
 
@@ -69,9 +69,14 @@ class LeiDosSenos(MovingCameraScene):
         ponto2 = np.array([0, -1.2, 0])
         ponto3 = np.array([0.85, 0.4, 0])
 
-        linha_origem_c = Line(ORIGIN, ponto1, color=PINK)
-        linha_origem_a = Line(ORIGIN, ponto2, color=PINK)
-        linha_origem_b = Line(ORIGIN, ponto3, color=PINK)
+        mc = (ponto2_tri + ponto1_tri)/2
+        linha_mediatriz_c = Line(ORIGIN, mc, color=PINK)
+
+        ma = (ponto2_tri + ponto3_tri)/2
+        linha_mediatriz_a = Line(ORIGIN, ma, color=PINK)
+
+        mb = (ponto3_tri + ponto1_tri)/2
+        linha_mediatriz_b = Line(ORIGIN, mb, color=PINK)
 
         l1 = Line(ponto1, ORIGIN)
         l2 = Line(ponto1, ponto1_tri)
@@ -82,7 +87,7 @@ class LeiDosSenos(MovingCameraScene):
         l5 = Line(ponto3, ORIGIN)
         l6 = Line(ponto3, ponto3_tri)
 
-        self.play(Write(linha_origem_c), Write(linha_origem_a), Write(linha_origem_b))
+        self.play(Write(linha_mediatriz_c), Write(linha_mediatriz_a), Write(linha_mediatriz_b))
 
         self.bring_to_front(triangulo)
         self.bring_to_front(dot1, dot2, dot3, dot4)
@@ -97,6 +102,50 @@ class LeiDosSenos(MovingCameraScene):
 
         self.bring_to_front(triangulo)
         self.bring_to_front(dot1, dot2, dot3, dot4)
+
+        ponto_x = np.array([-0.6, 1, 0])
+        ponto_y = np.array([-0.4, 1, 0])
+        ponto_x1 = np.array([-1.25, -0.3, 0])
+        ponto_y1 = np.array([-1.05, -0.3, 0])
+        congruencia_c1 = Line(ponto_x, ponto_y, color=ORANGE)
+        congruencia_c2 = Line(ponto_x1, ponto_y1, color=ORANGE)
+
+        ponto_x3 = np.array([0.6, 1, 0])
+        ponto_y3 = np.array([0.4, 1, 0])
+        ponto_x4 = np.array([1.25, -0.3, 0])
+        ponto_y4 = np.array([1.05, -0.3, 0])
+        congruencia_b1 = Line(ponto_x3, ponto_y3, color=RED)
+        congruencia_b2 = Line(ponto_x4, ponto_y4, color=RED)
+
+        ponto_x33 = np.array([0.7, 0.8, 0])
+        ponto_y33 = np.array([0.5, 0.8, 0])
+        ponto_x44 = np.array([1.35, -0.5, 0])
+        ponto_y44 = np.array([1.15, -0.5, 0])
+        congruencia_b11 = Line(ponto_x33, ponto_y33, color=RED)
+        congruencia_b22 = Line(ponto_x44, ponto_y44, color=RED)
+
+        ponto_x5 = np.array([0.75, -1.1, 0])
+        ponto_y5 = np.array([0.75, -1.3, 0])
+        ponto_x6 = np.array([-0.75, -1.1, 0])
+        ponto_y6 = np.array([-0.75, -1.3, 0])
+        congruencia_a1 = Line(ponto_x5, ponto_y5, color=YELLOW)
+        congruencia_a2 = Line(ponto_x6, ponto_y6, color=YELLOW)
+
+        ponto_x55 = np.array([0.95, -1.1, 0])
+        ponto_y55 = np.array([0.95, -1.3, 0])
+        ponto_x66 = np.array([-0.95, -1.1, 0])
+        ponto_y66 = np.array([-0.95, -1.3, 0])
+        congruencia_a11 = Line(ponto_x55, ponto_y55, color=YELLOW)
+        congruencia_a22 = Line(ponto_x66, ponto_y66, color=YELLOW)
+
+        ponto_x555 = np.array([0.55, -1.1, 0])
+        ponto_y555 = np.array([0.55, -1.3, 0])
+        ponto_x666 = np.array([-0.55, -1.1, 0])
+        ponto_y666 = np.array([-0.55, -1.3, 0])
+        congruencia_a111 = Line(ponto_x555, ponto_y555, color=YELLOW)
+        congruencia_a222 = Line(ponto_x666, ponto_y666, color=YELLOW)
+
+        self.play(FadeIn(congruencia_c1), FadeIn(congruencia_c2), FadeIn(congruencia_b1), FadeIn(congruencia_b2), FadeIn(congruencia_b11), FadeIn(congruencia_b22), FadeIn(congruencia_a1), FadeIn(congruencia_a2), FadeIn(congruencia_a11), FadeIn(congruencia_a22), FadeIn(congruencia_a111), FadeIn(congruencia_a222))
 
         self.wait(2)
 
